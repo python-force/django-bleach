@@ -4,7 +4,13 @@ from django import forms
 from django.core.exceptions import ImproperlyConfigured
 
 from django.conf import settings
-from django.utils.importlib import import_module
+
+try:
+    # Django versions >= 1.9
+    from django.utils.module_loading import import_module
+except ImportError:
+    # Django versions < 1.9
+    from django.utils.importlib import import_module
 
 from django_bleach.utils import get_bleach_default_options
 
